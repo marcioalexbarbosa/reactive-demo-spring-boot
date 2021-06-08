@@ -25,7 +25,9 @@ class DummyHandler {
     }
 
     Mono<ServerResponse> all(ServerRequest r) {
-        return defaultReadResponse(this.dummyService.all());
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_STREAM_JSON)
+                .body(dummyService.all(), Dummy.class);
     }
 
     Mono<ServerResponse> deleteById(ServerRequest r) {
